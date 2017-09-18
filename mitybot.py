@@ -2,8 +2,9 @@ import argparse
 import requests
 import json
 import re
+import time
 import urllib
-import command_handler
+from command_handler import CommandHandler
 from jsonpath_rw import jsonpath, parse
 
 def stripComments(inStr):
@@ -43,20 +44,29 @@ class Mitybot:
       chatName = parse('$.message.chat.title').find(result)
       if not newMemberName or not chatName:
         return
-      welcomeMsg = 'Welcome to {0}, {1}! The message of the day is {{3}}.\n\n(I am Mitybot 2.0, and I am being tested in production! Go me!)'.format(newMemberName[0].value, chatName[0].value)
+      welcomeMsg = 'Welcome to {0}, {1}! The message of the day is <getMotdHandler.Mitybot instance at 0x7f2524f1f998>.\n\n(I am Mitybot 2.0, and I am being tested in production! Go me!)'.format(newMemberName[0].value, chatName[0].value)
       self.replyText(result, welcomeMsg)
 
   def handleMessage(self, result):
     # in group chats, ignore commands not beginning with /mitybot
     groupType = parse('$.message.chat.type').find(result)
     text = parse('$.message.text').find(result)
+    if not text:
+      return
+    text = text[0].value
     if groupType and groupType[0].value == "group":
-      if text and not text[0].value.lower().startswith('/mitybot '):
+      if text and not text.lower().startswith('/mitybot '):
         return False
       text = text[9:]
-    handleCommand(self, result, command)
+    ret = self.commandHandler.handleCommand(result, text)
+    print "got back:", ret
+    if not ret:
+      return
+    if isinstance(ret, basestring):
+      self.replyText(result, ret)
 
   def start(self):
+    self.commandHandler = CommandHandler()
     with open('private/telegramApiKey', 'r') as apiKeyFile:
       self.apiKey = apiKeyFile.read().replace('\n', '')
     with open('private/chatWhitelist', 'r') as chatWhitelistFile:
@@ -65,17 +75,19 @@ class Mitybot:
       self.userBlacklist = json.loads(stripComments(userBlacklistFile.read()))
 
     curOffset = 0
-    getUpdatesUrl = 'https://api.telegram.org/bot{0}/getUpdates?offset={1}'.format(self.apiKey, curOffset)
-    print getUpdatesUrl
-    resp = requests.get(getUpdatesUrl)
-    resp = json.loads(resp.text)
-    for result in resp["result"]:
-      if not self.checkEligibility(result):
-        continue
-      self.handleChatMemberJoin(result)
-      self.handleMessage(result)
-      self.replyText(result, "The quick brown fox jumped over the lazy dog!!&")
-      #print result
+    while True:
+      getUpdatesUrl = 'https://api.telegram.org/bot{0}/getUpdates?offset={1}'.format(self.apiKey, curOffset + 1)
+      resp = requests.get(getUpdatesUrl)
+      resp = json.loads(resp.text)
+      for result in resp["result"]:
+        resultId = parse('$.update_id').find(result)
+        if resultId and resultId[0].value > curOffset:
+          curOffset = resultId[0].value
+        if not self.checkEligibility(result):
+          continue
+        self.handleChatMemberJoin(result)
+        self.handleMessage(result)
+      time.sleep(1)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='Start server')

@@ -4,8 +4,11 @@ import json
 import re
 import time
 import urllib
+import PIL
+from io import BytesIO
 from command_handler import CommandHandler
 from jsonpath_rw import jsonpath, parse
+import sys
 
 def stripComments(inStr):
   return re.sub(re.compile("/\*.*?\*/", re.DOTALL), "", inStr)
@@ -37,6 +40,19 @@ class Mitybot:
       url = 'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}{3}'.format(self.apiKey, chatId[0].value, textencoded, nonotify)
       requests.get(url)
 
+  def replyImage(self, result, image, optionalText=None, nonotify=True):
+    chatId = parse('$.message.chat.id').find(result)
+    if chatId:
+      image_file = BytesIO()
+      image.save(image_file, "JPEG")
+      image_file.seek(0)
+      multipart_data = {
+        "chat_id": ('', str(chatId[0].value)),
+        "photo": image_file
+      }
+      print multipart_data
+      r = requests.post('https://api.telegram.org/bot{0}/sendPhoto'.format(self.apiKey), files=multipart_data);
+
   def handleChatMemberJoin(self, result):
     newMember = parse('$.message.new_chat_participant.id').find(result)
     if newMember and newMember[0].value != 435893184: # Don't welcome ourselves... that's just tacky
@@ -58,12 +74,15 @@ class Mitybot:
       if text and not text.lower().startswith('/mitybot '):
         return False
       text = text[9:]
+    
     ret = self.commandHandler.handleCommand(result, text)
     print "got back:", ret
     if not ret:
       return
     if isinstance(ret, basestring):
       self.replyText(result, ret)
+    elif isinstance(ret, PIL.JpegImagePlugin.JpegImageFile):
+      self.replyImage(result, ret)
 
   def start(self):
     self.commandHandler = CommandHandler()

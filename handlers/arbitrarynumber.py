@@ -1,3 +1,3 @@
 class Arbitrarynumber():
-  def handleCommand(self, args):
+  def handleCommand(self, command):
     return '4'

@@ -5,6 +5,10 @@ from handlers import arbitrarynumber
 from handlers import randomnumber
 from handlers import hello
 from handlers import memehandler
+from handlers import currenttime
+from handlers import helpcmd
+from handlers import dickpic
+from handlers import iloveyou
 
 class CommandHandler():
   def __init__(self):
@@ -19,8 +23,14 @@ class CommandHandler():
       'mock': ( memeHandler, None ),
       'success': ( memeHandler, None ),
       'notsureif': ( memeHandler, None ),
-      'feelsbad': ( memeHandler, None )
+      'feelsbad': ( memeHandler, None ),
+      'currenttime': ( currenttime.CurrentTime(), "gets the current time" ),
+      'help': ( helpcmd.HelpCmd(), "prints help" ),
+      'dickpic': ( dickpic.DickPic(), "gets a dick pic"),
+      'iloveyou': ( iloveyou.ILoveYou(), None )
     }
+    self.commands['help'][0].setCommands(self.commands)
+    self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])
     self.Command = namedtuple('Command', 'command args parent')
 
   def handleCommand(self, result, command):

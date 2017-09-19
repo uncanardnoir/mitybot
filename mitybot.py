@@ -5,6 +5,7 @@ import re
 import time
 import urllib
 import PIL
+from PIL import JpegImagePlugin
 from io import BytesIO
 from command_handler import CommandHandler
 from jsonpath_rw import jsonpath, parse
@@ -50,8 +51,19 @@ class Mitybot:
         "chat_id": ('', str(chatId[0].value)),
         "photo": image_file
       }
-      print multipart_data
-      r = requests.post('https://api.telegram.org/bot{0}/sendPhoto'.format(self.apiKey), files=multipart_data);
+      requests.post('https://api.telegram.org/bot{0}/sendPhoto'.format(self.apiKey), files=multipart_data)
+
+  def replyImageLink(self, result, link, optionalText=None, nonotify=True):
+    chatId = parse('$.message.chat.id').find(result)
+    if chatId:
+      embeddedUrl = urllib.quote_plus(link)
+      requests.post('https://api.telegram.org/bot{0}/sendPhoto?chat_id={1}&photo={2}'.format(self.apiKey, str(chatId[0].value), embeddedUrl))
+
+  def replyDocumentLink(self, result, link, optionalText=None, nonotify=True):
+    chatId = parse('$.message.chat.id').find(result)
+    if chatId:
+      embeddedUrl = urllib.quote_plus(link)
+      requests.post('https://api.telegram.org/bot{0}/sendDocument?chat_id={1}&document={2}'.format(self.apiKey, str(chatId[0].value), embeddedUrl))
 
   def handleChatMemberJoin(self, result):
     newMember = parse('$.message.new_chat_participant.id').find(result)
@@ -83,6 +95,11 @@ class Mitybot:
       self.replyText(result, ret)
     elif isinstance(ret, PIL.JpegImagePlugin.JpegImageFile):
       self.replyImage(result, ret)
+    elif isinstance(ret, tuple):
+      if ret[0] == 'documentLink':
+        self.replyDocumentLink(result, ret[1])
+      if ret[0] == 'imageLink':
+        self.replyImageLink(result, ret[1])
 
   def start(self):
     self.commandHandler = CommandHandler()

@@ -2,7 +2,7 @@ import datetime
 
 class Soupoftheday():
   def __init__(self):
-    self.soups = ['Gazpacho', 'Tomato Bisque', 'Cheddar', 'French Onion', 'Pea', 'Leek', 'Dog', 'Beef Noodle', 'Clam Chowder', 'Carrot', 'Minestrone', 'Coconut', 'Chicken Noodle', 'Autumn Squash', 'Cream of Chicken and Rice', 'Broccoli Cheddar', 'Turkey Chili', 'Baked Potato', 'Poop']
+    self.soups = ['Gazpacho', 'Tomato Bisque', 'Cheddar', 'French Onion', 'Pea', 'Leek', 'Dog', 'Beef Noodle', 'Clam Chowder', 'Carrot', 'Minestrone', 'Coconut', 'Chicken Noodle', 'Autumn Squash', 'Cream of Chicken and Rice', 'Broccoli Cheddar', 'Turkey Chili', 'Baked Potato', 'Poop', 'Lentil']
 
   def handleCommand(self, command):
     date = datetime.date.today()

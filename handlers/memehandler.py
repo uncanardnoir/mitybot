@@ -69,7 +69,7 @@ class MemeHandler():
     }
 
   def handleCommand(self, command):
-    if not command.command in self.normiememes:
+    if not command.command.lower() in self.normiememes:
       return
     filename = self.normiememes[command.command]
     if command.command == "mock":

@@ -6,7 +6,7 @@ class Question():
 
   def handleCommand(self, command):
     try:
-      content = urllib2.urlopen(self.getWolframString(urllib2.quote(command))).read()
+      content = urllib2.urlopen(self.getWolframString(urllib2.quote(command.args))).read()
     except:
       content = "I'm sorry I don't know the answer to that"
     return content

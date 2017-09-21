@@ -10,6 +10,7 @@ from handlers import helpcmd
 from handlers import dickpic
 from handlers import iloveyou
 from handlers import magic8ball
+from handlers import questions
 
 class CommandHandler():
   def __init__(self):
@@ -30,6 +31,7 @@ class CommandHandler():
       'dickpic': ( dickpic.DickPic(), "gets a dick pic"),
       'iloveyou': ( iloveyou.ILoveYou(), None ),
       'magic8ball': ( magic8ball.Magic8Ball(), None )
+      'question': ( questions.Question(), "answers your questions")
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

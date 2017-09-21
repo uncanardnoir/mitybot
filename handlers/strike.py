@@ -5,8 +5,10 @@ class Strike():
   def handleCommand(self, command):
     if command.command.lower() == "getstrikes":
       return self.getStrikesString()
+    if command.command.lower() == "deletestrikes":
+      return self.deleteStrikes()
     userId = parse('$.message.from.id').find(command.parent)
-    strikeUser = command.args
+    strikeUser = command.args.lower()
     if not userId or not strikeUser:
       return None
     userId = userId[0].value
@@ -41,3 +43,8 @@ class Strike():
       return 'There are no strikes!'
     else:
       return 'Current strike records:\n{0}'.format(ret)
+	  
+  def deleteStrikes(self):
+    for filepath in os.listdir('strike'):
+      os.remove(filepath)
+    return None

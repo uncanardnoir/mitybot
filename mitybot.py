@@ -30,7 +30,6 @@ class Mitybot:
     chatId = parse('$.message.chat.id').find(result)
     if chatId and not chatId[0].value in self.chatWhitelist:
       return False
-
     return True
 
   def replyText(self, result, text, nonotify = True):
@@ -82,7 +81,7 @@ class Mitybot:
     if not text:
       return
     text = text[0].value
-    if groupType and groupType[0].value == "group":
+    if groupType and (groupType[0].value == "group" or groupType[0].value == "supergroup"):
       if text and not text.lower().startswith('/mitybot '):
         return False
       text = text[9:]

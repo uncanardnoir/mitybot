@@ -47,4 +47,3 @@ class Strike():
   def deleteStrikes(self):
     for filepath in os.listdir('strike'):
       os.remove(filepath)
-    return None

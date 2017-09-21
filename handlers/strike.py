@@ -6,15 +6,17 @@ class Strike():
     if command.command.lower() == "getstrikes":
       return self.getStrikesString()
     userId = parse('$.message.from.id').find(command.parent)
-    strikeUser = command.args.lower()
-    if not userId or not strikeUser:
+    if not userId:
       return None
     userId = userId[0].value
-    userFile = 'strike/{0}'.format(strikeUser)
     if not userId == 313082320: #Ryan's id
       return "Pshhh. You cannot assign strikes."
     if command.command.lower() == "deletestrikes":
       return self.deleteStrikes()
+    if not command.args:
+      return None
+    strikeUser = command.args.lower()
+    userFile = 'strike/{0}'.format(strikeUser)
     if not os.path.isfile(userFile):
       with open(userFile, "w") as f:
         f.write("{0}\n1".format(strikeUser))

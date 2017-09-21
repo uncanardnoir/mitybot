@@ -14,6 +14,7 @@ from handlers import questions
 from handlers import badbot
 from handlers import strike
 from handlers import forgive
+from handlers import hotdognothotdog
 
 class CommandHandler():
   def __init__(self):
@@ -44,6 +45,7 @@ class CommandHandler():
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'forgive': ( forgiveHandler, None),
+      'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog")
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

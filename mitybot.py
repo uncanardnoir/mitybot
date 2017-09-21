@@ -88,7 +88,7 @@ class Mitybot:
       text = text[9:]
     
     ret = self.commandHandler.handleCommand(result, text)
-    print "got back:", ret
+    #print "got back:", ret
     if not ret:
       return
     if isinstance(ret, basestring):

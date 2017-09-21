@@ -11,11 +11,13 @@ from handlers import dickpic
 from handlers import iloveyou
 from handlers import magic8ball
 from handlers import questions
+from handlers import badbot
 
 class CommandHandler():
   def __init__(self):
     # Commands that have a description will be public. Ones that don't will be hidden
     memeHandler = memehandler.MemeHandler()
+    badbotHandler = badbot.BadBot()
     self.commands = {
       'whoareyou': ( whoareyou.Whoareyou(), "prints information about Mitybot 2.0" ),
       'soupoftheday': ( soupoftheday.Soupoftheday(), "gets the soup of the day" ),
@@ -30,8 +32,10 @@ class CommandHandler():
       'help': ( helpcmd.HelpCmd(), "prints help" ),
       'dickpic': ( dickpic.DickPic(), "gets a dick pic"),
       'iloveyou': ( iloveyou.ILoveYou(), None ),
-      'magic8ball': ( magic8ball.Magic8Ball(), None )
-      'question': ( questions.Question(), "answers your questions")
+      'magic8ball': ( magic8ball.Magic8Ball(), None ),
+      'question': ( questions.Question(), "answers your questions"),
+      'badbot': ( badbot.BadBot(), None ),
+      'goodbot': ( badbot.BadBot(), None )
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

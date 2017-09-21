@@ -73,9 +73,9 @@ class MemeHandler():
       return
     filename = self.normiememes[command.command.lower()]
     if command.command == "mock":
-      memeText = stupefy(command.args[0])
+      memeText = stupefy(command.args)
     else:
-      memeText = command.args[0]
+      memeText = command.args
     if len(memeText) > 75:
       split = ("Index out of range exception in", "doSendRequest(text, cred={\"user\": \"mity\", \"pass\": \"iloveryan\"})")
     else:

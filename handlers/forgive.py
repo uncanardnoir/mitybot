@@ -5,32 +5,32 @@ class Forgive():
   def handleCommand(self, command):
     if command.command.lower() == "getforgives":
       return self.getForgiveString()
-	if command.command.lower() == "forgive":
-	  strikeUser = command.args.lower()
+    if command.command.lower() == "forgive":
+      strikeUser = command.args.lower()
       if not strikeUser:
         return None
-	  return self.forgiveUser(strikeUser)
-	return None
-	  
+      return self.forgiveUser(strikeUser)
+    return None
+      
   def forgiveUser(strikeUser):
     userStrikeFile = 'strike/{0}'.format(strikeUser)
-	userForgiveFile = 'forgive/{0}'.format(strikeUser)
+    userForgiveFile = 'forgive/{0}'.format(strikeUser)
     if not os.path.isfile(userStrikeFile):
       return "Nothing to forgive."
     else:
-	  nStrikes = 0
-	  nForgives = 0
+      nStrikes = 0
+      nForgives = 0
       with open(userStrikeFile, "r+") as f:
         data = f.read().split()
         nStrikes = int(data[1])
         f.seek(0)
         f.write("{0}\n0".format(strikeUser))
         f.truncate()
-	  with open(userForgiveFile, "r+") as f:
-	    data = f.read().split()
-		if not data:
-		  nForgives = nStrikes
-		else:
+      with open(userForgiveFile, "r+") as f:
+        data = f.read().split()
+        if not data:
+          nForgives = nStrikes
+        else:
           nForgives = int(data[1]) + nStrikes
         f.seek(0)
         f.write("{0}\n{1}".format(strikeUser, nForgives))

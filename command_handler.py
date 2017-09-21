@@ -21,7 +21,7 @@ class CommandHandler():
     memeHandler = memehandler.MemeHandler()
     badbotHandler = badbot.BadBot()
     strikeHandler = strike.Strike()
-	forgiveHandler = forgive.Forgive()
+    forgiveHandler = forgive.Forgive()
     self.commands = {
       'whoareyou': ( whoareyou.Whoareyou(), "prints information about Mitybot 2.0" ),
       'soupoftheday': ( soupoftheday.Soupoftheday(), "gets the soup of the day" ),
@@ -43,7 +43,7 @@ class CommandHandler():
       'strike': ( strikeHandler, None),
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
-	  'forgive': ( forgiveHandler, None),
+      'forgive': ( forgiveHandler, None),
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

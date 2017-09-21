@@ -19,6 +19,7 @@ class CommandHandler():
     # Commands that have a description will be public. Ones that don't will be hidden
     memeHandler = memehandler.MemeHandler()
     badbotHandler = badbot.BadBot()
+    strikeHandler = strike.Strike()
     self.commands = {
       'whoareyou': ( whoareyou.Whoareyou(), "prints information about Mitybot 2.0" ),
       'soupoftheday': ( soupoftheday.Soupoftheday(), "gets the soup of the day" ),
@@ -35,10 +36,10 @@ class CommandHandler():
       'iloveyou': ( iloveyou.ILoveYou(), None ),
       'magic8ball': ( magic8ball.Magic8Ball(), None ),
       'question': ( questions.Question(), "answers your questions"),
-      'badbot': ( badbot.BadBot(), None ),
-      'goodbot': ( badbot.BadBot(), None ),
-      'strike': ( strike.Strike(), None),
-      'getstrikes': ( strike.Strike(), "prints the current strike count"),
+      'badbot': ( badbotHandler, None ),
+      'goodbot': ( badbotHandler, None ),
+      'strike': ( strikeHandler, None),
+      'getstrikes': ( strikeHandler, "prints the current strike count"),
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

@@ -9,6 +9,7 @@ from handlers import currenttime
 from handlers import helpcmd
 from handlers import dickpic
 from handlers import iloveyou
+from handlers import magic8ball
 from handlers import questions
 
 class CommandHandler():
@@ -29,6 +30,7 @@ class CommandHandler():
       'help': ( helpcmd.HelpCmd(), "prints help" ),
       'dickpic': ( dickpic.DickPic(), "gets a dick pic"),
       'iloveyou': ( iloveyou.ILoveYou(), None ),
+      'magic8ball': ( magic8ball.Magic8Ball(), None )
       'question': ( questions.Question(), "answers your questions")
     }
     self.commands['help'][0].setCommands(self.commands)
@@ -42,6 +44,6 @@ class CommandHandler():
     args = args[1:]
     if command.lower() in self.commands:
       handler = self.commands[command.lower()][0]
-      command = self.Command(command, args, result)
+      command = self.Command(command, args[0] if args else None, result)
       return handler.handleCommand(command)
     return None

@@ -5,6 +5,12 @@ class Forgive():
   def handleCommand(self, command):
     if command.command.lower() == "getforgives":
       return self.getForgiveString()
+    userId = parse('$.message.from.id').find(command.parent)
+    if not userId:
+      return None
+    userId = userId[0].value
+    if not userId == 313082320: #Ryan's id
+      return "Pshhh. You cannot forgive strikes."
     if command.command.lower() == "forgive":
       strikeUser = command.args.lower()
       if not strikeUser:

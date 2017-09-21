@@ -6,7 +6,7 @@ class Strike():
     if command.command.lower() == "getstrikes":
       return self.getStrikesString()
     userId = parse('$.message.from.id').find(command.parent)
-    if not userId or not strikeUser:
+    if not userId:
       return None
     userId = userId[0].value
     if not userId == 313082320: #Ryan's id

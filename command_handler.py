@@ -12,6 +12,7 @@ from handlers import iloveyou
 from handlers import magic8ball
 from handlers import questions
 from handlers import badbot
+from handlers import strike
 
 class CommandHandler():
   def __init__(self):
@@ -35,7 +36,9 @@ class CommandHandler():
       'magic8ball': ( magic8ball.Magic8Ball(), None ),
       'question': ( questions.Question(), "answers your questions"),
       'badbot': ( badbot.BadBot(), None ),
-      'goodbot': ( badbot.BadBot(), None )
+      'goodbot': ( badbot.BadBot(), None ),
+	  'strike': ( strike.Strike(), None),
+	  'getstrikes': ( strike.Strike(), "prints the current strike count"),
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

@@ -37,8 +37,8 @@ class CommandHandler():
       'question': ( questions.Question(), "answers your questions"),
       'badbot': ( badbot.BadBot(), None ),
       'goodbot': ( badbot.BadBot(), None ),
-	  'strike': ( strike.Strike(), None),
-	  'getstrikes': ( strike.Strike(), "prints the current strike count"),
+      'strike': ( strike.Strike(), None),
+      'getstrikes': ( strike.Strike(), "prints the current strike count"),
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

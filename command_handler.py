@@ -9,6 +9,7 @@ from handlers import currenttime
 from handlers import helpcmd
 from handlers import dickpic
 from handlers import iloveyou
+from handlers import questions
 
 class CommandHandler():
   def __init__(self):
@@ -27,7 +28,8 @@ class CommandHandler():
       'currenttime': ( currenttime.CurrentTime(), "gets the current time" ),
       'help': ( helpcmd.HelpCmd(), "prints help" ),
       'dickpic': ( dickpic.DickPic(), "gets a dick pic"),
-      'iloveyou': ( iloveyou.ILoveYou(), None )
+      'iloveyou': ( iloveyou.ILoveYou(), None ),
+      'question': ( questions.Question(), "answers your questions")
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

@@ -44,7 +44,9 @@ class Forgive():
         f.seek(0)
         f.write("{0}\n{1}".format(strikeUser, nForgives))
         f.truncate()
-      return "{0}, your corndad has forgiven you. You have been saved {1} strikes for a total of {2} strikes.".format(strikeUser, nStrikes, nForgives)
+      strRemovedS = 's' if nStrikes != 1 else ''
+      strTotalS = 's' if nForgives != 1 else ''
+      return "{0}, your corndad has forgiven you. You have been saved {1} strike{2} for a total of {3} strike{4}.".format(strikeUser, nStrikes, strRemovedS, nForgives, strTotalS)
 
   def getForgiveString(self):
     ret = ''

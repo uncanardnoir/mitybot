@@ -71,7 +71,7 @@ class MemeHandler():
   def handleCommand(self, command):
     if not command.command.lower() in self.normiememes:
       return
-    filename = self.normiememes[command.command]
+    filename = self.normiememes[command.command.lower()]
     if command.command == "mock":
       memeText = stupefy(command.args[0])
     else:

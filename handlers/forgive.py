@@ -33,9 +33,12 @@ class Forgive():
         f.write("{0}\n0".format(strikeUser))
         f.truncate()
       with open(userForgiveFile, "r+") as f:
-        data = f.read().split()
+        try:
+          data = f.read().split()
+        except:
+          data = None
         if not data:
-          nForgives = nStrikes
+          nForgives = nStrikes 
         else:
           nForgives = int(data[1]) + nStrikes
         f.seek(0)

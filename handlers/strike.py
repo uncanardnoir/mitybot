@@ -6,13 +6,15 @@ class Strike():
     if command.command.lower() == "getstrikes":
       return self.getStrikesString()
     userId = parse('$.message.from.id').find(command.parent)
-    strikeUser = command.args
+    strikeUser = command.args.lower()
     if not userId or not strikeUser:
       return None
     userId = userId[0].value
     userFile = 'strike/{0}'.format(strikeUser)
     if not userId == 313082320: #Ryan's id
       return "Pshhh. You cannot assign strikes."
+    if command.command.lower() == "deletestrikes":
+      return self.deleteStrikes()
     if not os.path.isfile(userFile):
       with open(userFile, "w") as f:
         f.write("{0}\n1".format(strikeUser))
@@ -41,3 +43,7 @@ class Strike():
       return 'There are no strikes!'
     else:
       return 'Current strike records:\n{0}'.format(ret)
+	  
+  def deleteStrikes(self):
+    for filepath in os.listdir('strike'):
+      os.remove(filepath)

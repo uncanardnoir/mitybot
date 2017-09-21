@@ -39,6 +39,7 @@ class CommandHandler():
       'badbot': ( badbotHandler, None ),
       'goodbot': ( badbotHandler, None ),
       'strike': ( strikeHandler, None),
+      'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
     }
     self.commands['help'][0].setCommands(self.commands)

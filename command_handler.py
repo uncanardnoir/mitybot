@@ -46,7 +46,7 @@ class CommandHandler():
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
-      'dice': (dice.Dice()), "rolls dice, use XdY format"),
+      'roll': (dice.Roll()), "rolls dice, use XdY format"),
       'forgive': ( forgiveHandler, None)
     }
     self.commands['help'][0].setCommands(self.commands)

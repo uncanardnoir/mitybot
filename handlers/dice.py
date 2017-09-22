@@ -1,7 +1,7 @@
 import random
 from array import array
 
-class Dice():
+class Roll():
   def __init__(self):
     #warning, not true randomness
     random.seed()

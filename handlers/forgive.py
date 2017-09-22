@@ -18,7 +18,7 @@ class Forgive():
       return self.forgiveUser(strikeUser)
     return None
       
-  def forgiveUser(strikeUser):
+  def forgiveUser(self, strikeUser):
     userStrikeFile = 'strike/{0}'.format(strikeUser)
     userForgiveFile = 'forgive/{0}'.format(strikeUser)
     nStrikes = 0
@@ -35,7 +35,8 @@ class Forgive():
     if not os.path.isfile(userForgiveFile):
       with open(userForgiveFile, "w") as f:
         ''' Forgive file doesn't exist, so this is our first time '''
-        f.write("{0}\n{1}".format(strikeUser, nStrikes))
+        nForgives = nStrikes
+        f.write("{0}\n{1}".format(strikeUser, nForgives))
     else:
       with open(userForgiveFile, "r+") as f:
         try:
@@ -49,9 +50,9 @@ class Forgive():
         f.seek(0)
         f.write("{0}\n{1}".format(strikeUser, nForgives))
         f.truncate()
-      strRemovedS = 's' if nStrikes != 1 else ''
-      strTotalS = 's' if nForgives != 1 else ''
-      return "{0}, your corndad has forgiven you. You have been saved {1} strike{2} for a total of {3} strike{4}.".format(strikeUser, nStrikes, strRemovedS, nForgives, strTotalS)
+    strRemovedS = 's' if nStrikes != 1 else ''
+    strTotalS = 's' if nForgives != 1 else ''
+    return "{0}, your corndad has forgiven you. You have been saved {1} strike{2} for a total of {3} strike{4}.".format(strikeUser, nStrikes, strRemovedS, nForgives, strTotalS)
 
   def getForgiveString(self):
     ret = ''

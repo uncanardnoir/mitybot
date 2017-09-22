@@ -18,7 +18,7 @@ class Forgive():
       return self.forgiveUser(strikeUser)
     return None
       
-  def forgiveUser(strikeUser):
+  def forgiveUser(self, strikeUser):
     userStrikeFile = 'strike/{0}'.format(strikeUser)
     userForgiveFile = 'forgive/{0}'.format(strikeUser)
     if not os.path.isfile(userStrikeFile):

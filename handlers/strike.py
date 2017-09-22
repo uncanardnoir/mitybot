@@ -12,7 +12,7 @@ class Strike():
     if not userId == 313082320: #Ryan's id
       if command.command.lower() == "deletestrikes":
         return "Pshhh. You cannot delete strikes."
-      else :
+      else:
         return "Pshhh. You cannot assign strikes." 
     if command.command.lower() == "deletestrikes":
       return self.deleteStrikes()

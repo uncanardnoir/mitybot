@@ -47,7 +47,8 @@ class CommandHandler():
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
       'dice': (dice.Dice()), "rolls dice, use XdY format"),
-      'forgive': ( forgiveHandler, None)
+      'forgive': ( forgiveHandler, None),
+      'getforgives': ( forgiveHandler, "prints the current forgive count")
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

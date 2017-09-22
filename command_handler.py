@@ -15,6 +15,7 @@ from handlers import badbot
 from handlers import strike
 from handlers import forgive
 from handlers import hotdognothotdog
+from handlers import dice
 
 class CommandHandler():
   def __init__(self):
@@ -44,8 +45,9 @@ class CommandHandler():
       'strike': ( strikeHandler, None),
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
-      'forgive': ( forgiveHandler, None),
-      'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog")
+      'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
+      'dice': (dice.Dice()), "rolls dice, use XdY format"),
+      'forgive': ( forgiveHandler, None)
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

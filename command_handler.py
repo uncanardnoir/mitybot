@@ -46,7 +46,7 @@ class CommandHandler():
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
-      'dice': (dice.Dice()), "rolls dice, use XdY format"),
+      'dice': (dice.Dice(), "rolls dice, use XdY format"),
       'forgive': ( forgiveHandler, None),
       'getforgives': ( forgiveHandler, "prints the current forgive count")
     }

@@ -15,7 +15,7 @@ from handlers import badbot
 from handlers import strike
 from handlers import forgive
 from handlers import hotdognothotdog
-from handlers import dice
+from handlers import roll
 
 class CommandHandler():
   def __init__(self):
@@ -46,7 +46,7 @@ class CommandHandler():
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
-      'dice': (dice.Dice(), "rolls dice, use XdY format"),
+      'roll': (roll.Roll(), "rolls dice, use XdY format"),
       'forgive': ( forgiveHandler, None),
       'getforgives': ( forgiveHandler, "prints the current forgive count")
     }

@@ -47,12 +47,15 @@ class HotdogNotHotdog:
     data = image_file.read()
  
     with tf.Session() as session:
-      tensor = session.graph.get_tensor_by_name('final_result:0')
-      result = session.run(tensor, {'DecodeJpeg/contents:0': data})
-      top_results = result[0].argsort()[-len(result[0]):][::-1]
-      for type in top_results:
-        hotdogprob = result[0][0]
-        if hotdogprob > 0.5:
-          return "Is.. HOT DOG! (hot dog prob: {0})".format(hotdogprob)
-        else:
-          return "Is.. NOT HOT DOG! (hot dog prob: {0})".format(hotdogprob)
+      try:
+        tensor = session.graph.get_tensor_by_name('final_result:0')
+        result = session.run(tensor, {'DecodeJpeg/contents:0': data})
+        top_results = result[0].argsort()[-len(result[0]):][::-1]
+        for type in top_results:
+          hotdogprob = result[0][0]
+          if hotdogprob > 0.5:
+            return "Is.. HOT DOG! (hot dog prob: {0})".format(hotdogprob)
+          else:
+            return "Is.. NOT HOT DOG! (hot dog prob: {0})".format(hotdogprob)
+      except:
+        return "An error occurred"

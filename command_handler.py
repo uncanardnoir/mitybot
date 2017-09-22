@@ -13,6 +13,7 @@ from handlers import magic8ball
 from handlers import questions
 from handlers import badbot
 from handlers import strike
+from handlers import forgive
 from handlers import hotdognothotdog
 from handlers import dice
 
@@ -22,6 +23,7 @@ class CommandHandler():
     memeHandler = memehandler.MemeHandler()
     badbotHandler = badbot.BadBot()
     strikeHandler = strike.Strike()
+    forgiveHandler = forgive.Forgive()
     self.commands = {
       'whoareyou': ( whoareyou.Whoareyou(), "prints information about Mitybot 2.0" ),
       'soupoftheday': ( soupoftheday.Soupoftheday(), "gets the soup of the day" ),
@@ -44,7 +46,8 @@ class CommandHandler():
       'deletestrikes': ( strikeHandler, None),
       'getstrikes': ( strikeHandler, "prints the current strike count"),
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
-      'dice': (dice.Dice()), "rolls dice, use XdY format")
+      'dice': (dice.Dice()), "rolls dice, use XdY format"),
+      'forgive': ( forgiveHandler, None)
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

@@ -10,7 +10,10 @@ class Strike():
       return None
     userId = userId[0].value
     if not userId == 313082320: #Ryan's id
-      return "Pshhh. You cannot assign strikes."
+      if command.command.lower() == "deletestrikes":
+        return "Pshhh. You cannot delete strikes."
+      else:
+        return "Pshhh. You cannot assign strikes." 
     if command.command.lower() == "deletestrikes":
       return self.deleteStrikes()
     if not command.args:
@@ -28,7 +31,7 @@ class Strike():
         f.seek(0)
         f.write("{0}\n{1}".format(strikeUser, nStrikes))
         f.truncate()
-    return "Careful {0}. You are now at {1} strikes.".format(strikeUser, nStrikes)
+    return "Careful {0}. You are now at {1} strike{2}.".format(strikeUser, nStrikes, 's' if thisStrike != 1 else '')
 
   def getStrikesString(self):
     ret = ''

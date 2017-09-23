@@ -16,6 +16,7 @@ from handlers import strike
 from handlers import forgive
 from handlers import hotdognothotdog
 from handlers import roll
+from handlers import supposably
 
 class CommandHandler():
   def __init__(self):
@@ -30,6 +31,7 @@ class CommandHandler():
       'arbitrarynumber': ( arbitrarynumber.Arbitrarynumber(), "returns an arbitrary number" ),
       'randomnumber': ( randomnumber.Randomnumber(), None ),
       'hello': ( hello.Hello(), "say hello to Mitybot!" ),
+      'supposably': ( supposably.Supposably(), None ),
       'mock': ( memeHandler, None ),
       'success': ( memeHandler, None ),
       'notsureif': ( memeHandler, None ),

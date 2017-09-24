@@ -111,9 +111,14 @@ class Mitybot:
 
     curOffset = 0
     while True:
-      getUpdatesUrl = 'https://api.telegram.org/bot{0}/getUpdates?offset={1}'.format(self.apiKey, curOffset + 1)
-      resp = requests.get(getUpdatesUrl)
-      resp = json.loads(resp.text)
+      try:
+        getUpdatesUrl = 'https://api.telegram.org/bot{0}/getUpdates?offset={1}'.format(self.apiKey, curOffset + 1)
+        resp = requests.get(getUpdatesUrl)
+        resp = json.loads(resp.text)
+      except:
+        print "Error: Exception thrown"
+        time.sleep(1)
+        continue
       for result in resp["result"]:
         resultId = parse('$.update_id').find(result)
         if resultId and resultId[0].value > curOffset:

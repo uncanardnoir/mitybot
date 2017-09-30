@@ -17,6 +17,7 @@ from handlers import forgive
 from handlers import hotdognothotdog
 from handlers import roll
 from handlers import supposably
+from handlers import tellajoke
 
 class CommandHandler():
   def __init__(self):
@@ -50,7 +51,8 @@ class CommandHandler():
       'hotdognothotdog': ( hotdognothotdog.HotdogNotHotdog(), "It's a hotdog ... or not a hotdog"),
       'roll': (roll.Roll(), "rolls dice, use XdY format"),
       'forgive': ( forgiveHandler, None),
-      'getforgives': ( forgiveHandler, "prints the current forgive count")
+      'getforgives': ( forgiveHandler, "prints the current forgive count"),
+      'tellajoke': ( tellajoke.TellAJoke(), "tell a joke" )
     }
     self.commands['help'][0].setCommands(self.commands)
     self.commands['whoareyou'][0].setLover(self.commands['iloveyou'][0])

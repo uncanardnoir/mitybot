@@ -37,7 +37,7 @@ class Mitybot:
     if chatId:
       textencoded = urllib.quote_plus(text)
       nonotify = "&disable_notification=true" if nonotify else ""
-      url = 'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&parse_mode=markdown&text={2}{3}'.format(self.apiKey, chatId[0].value, textencoded, nonotify)
+      url = 'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}{3}'.format(self.apiKey, chatId[0].value, textencoded, nonotify)
       requests.get(url)
 
   def replyImage(self, result, image, optionalText=None, nonotify=True):

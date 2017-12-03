@@ -35,7 +35,7 @@ class Mitybot:
   def replyText(self, result, text, nonotify = True):
     chatId = parse('$.message.chat.id').find(result)
     if chatId:
-      textencoded = urllib.quote_plus(text)
+      textencoded = urllib.quote_plus(text.encode('utf-8'))
       nonotify = "&disable_notification=true" if nonotify else ""
       url = 'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}{3}'.format(self.apiKey, chatId[0].value, textencoded, nonotify)
       requests.get(url)
@@ -55,13 +55,13 @@ class Mitybot:
   def replyImageLink(self, result, link, optionalText=None, nonotify=True):
     chatId = parse('$.message.chat.id').find(result)
     if chatId:
-      embeddedUrl = urllib.quote_plus(link)
+      embeddedUrl = urllib.quote_plus(link.encode('utf-8'))
       requests.post('https://api.telegram.org/bot{0}/sendPhoto?chat_id={1}&photo={2}'.format(self.apiKey, str(chatId[0].value), embeddedUrl))
 
   def replyDocumentLink(self, result, link, optionalText=None, nonotify=True):
     chatId = parse('$.message.chat.id').find(result)
     if chatId:
-      embeddedUrl = urllib.quote_plus(link)
+      embeddedUrl = urllib.quote_plus(link.encode('utf-8'))
       requests.post('https://api.telegram.org/bot{0}/sendDocument?chat_id={1}&document={2}'.format(self.apiKey, str(chatId[0].value), embeddedUrl))
 
   def handleChatMemberJoin(self, result):
